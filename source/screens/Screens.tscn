@@ -1,0 +1,20 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://screens/MainMenu.tscn" type="PackedScene" id=1]
+[ext_resource path="res://screens/Screens.gd" type="Script" id=2]
+[ext_resource path="res://screens/CodeScreen.tscn" type="PackedScene" id=3]
+[ext_resource path="res://screens/LevelMenu.tscn" type="PackedScene" id=4]
+[ext_resource path="res://screens/MessageScreen.tscn" type="PackedScene" id=5]
+
+[node name="Screens" type="Node"]
+script = ExtResource( 2 )
+
+[node name="LevelMenu" parent="." instance=ExtResource( 4 )]
+
+[node name="LevelFinished" parent="." instance=ExtResource( 5 )]
+
+[node name="LevelSplash" parent="." instance=ExtResource( 5 )]
+
+[node name="CodeScreen" parent="." instance=ExtResource( 3 )]
+
+[node name="MainMenu" parent="." instance=ExtResource( 1 )]

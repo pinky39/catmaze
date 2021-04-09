@@ -1,0 +1,191 @@
+[gd_scene load_steps=20 format=2]
+
+[ext_resource path="res://assets/cm-cat.png" type="Texture" id=1]
+[ext_resource path="res://maze/Cat.gd" type="Script" id=2]
+
+[sub_resource type="Animation" id=1]
+resource_name = "GoToSleep"
+length = 5.0
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 2, 4, 4.5 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 2, 4, 5, 6 ]
+}
+
+[sub_resource type="Animation" id=2]
+resource_name = "Idle"
+length = 0.3
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 2 ]
+}
+
+[sub_resource type="Animation" id=3]
+resource_name = "MoveEar"
+length = 3.0
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 2, 3 ]
+}
+
+[sub_resource type="Animation" id=4]
+resource_name = "Sleep"
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 5, 6 ]
+}
+
+[sub_resource type="Animation" id=5]
+length = 0.6
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 0, 1 ]
+}
+
+[sub_resource type="AnimationNodeAnimation" id=6]
+animation = "GoToSleep"
+
+[sub_resource type="AnimationNodeAnimation" id=7]
+animation = "Idle"
+
+[sub_resource type="AnimationNodeAnimation" id=8]
+animation = "Sleep"
+
+[sub_resource type="AnimationNodeAnimation" id=9]
+animation = "Walk"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=10]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=11]
+switch_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=12]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=13]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=14]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=15]
+
+[sub_resource type="AnimationNodeStateMachine" id=16]
+states/GoToSleep/node = SubResource( 6 )
+states/GoToSleep/position = Vector2( 419, 56 )
+states/Idle/node = SubResource( 7 )
+states/Idle/position = Vector2( 198, 56 )
+states/Sleep/node = SubResource( 8 )
+states/Sleep/position = Vector2( 400, 210 )
+states/Walk/node = SubResource( 9 )
+states/Walk/position = Vector2( 125, 203 )
+transitions = [ "Idle", "GoToSleep", SubResource( 10 ), "GoToSleep", "Sleep", SubResource( 11 ), "Sleep", "Idle", SubResource( 12 ), "Idle", "Walk", SubResource( 13 ), "Walk", "Idle", SubResource( 14 ), "GoToSleep", "Idle", SubResource( 15 ) ]
+start_node = "Idle"
+
+[sub_resource type="AnimationNodeStateMachinePlayback" id=17]
+
+[node name="Cat" type="Node2D"]
+script = ExtResource( 2 )
+
+[node name="Sprite" type="Sprite" parent="."]
+texture = ExtResource( 1 )
+hframes = 7
+frame = 2
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/GoToSleep = SubResource( 1 )
+anims/Idle = SubResource( 2 )
+anims/MoveEar = SubResource( 3 )
+anims/Sleep = SubResource( 4 )
+anims/Walk = SubResource( 5 )
+
+[node name="AnimationTree" type="AnimationTree" parent="."]
+tree_root = SubResource( 16 )
+anim_player = NodePath("../AnimationPlayer")
+active = true
+parameters/playback = SubResource( 17 )
+
+[node name="ForwardDetector" type="RayCast2D" parent="."]
+visible = false
+enabled = true
+cast_to = Vector2( 16, 0 )
+collision_mask = 19
+collide_with_areas = true
+
+[node name="Tween" type="Tween" parent="."]
+
+[node name="LookRight" type="RayCast2D" parent="."]
+visible = false
+enabled = true
+cast_to = Vector2( 0, 500 )
+collision_mask = 3
+collide_with_areas = true
+
+[node name="LookLeft" type="RayCast2D" parent="."]
+visible = false
+enabled = true
+cast_to = Vector2( 0, -500 )
+collision_mask = 3
+collide_with_areas = true
+
+[node name="LookBack" type="RayCast2D" parent="."]
+visible = false
+enabled = true
+cast_to = Vector2( -500, 0 )
+collision_mask = 3
+collide_with_areas = true
+
+[node name="LookForward" type="RayCast2D" parent="."]
+visible = false
+enabled = true
+cast_to = Vector2( 500, 0 )
+collision_mask = 3
+collide_with_areas = true
+
+[node name="StartDelay" type="Timer" parent="."]
+wait_time = 3.0
+one_shot = true
+autostart = true
+
+[connection signal="tween_completed" from="Tween" to="." method="_on_tween_completed"]
+[connection signal="timeout" from="StartDelay" to="." method="_on_StartDelay_timeout"]

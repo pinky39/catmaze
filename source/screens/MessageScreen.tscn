@@ -1,0 +1,27 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://screens/BaseScreen.tscn" type="PackedScene" id=1]
+[ext_resource path="res://screens/MessageScreen.gd" type="Script" id=2]
+
+[node name="Screen" instance=ExtResource( 1 )]
+script = ExtResource( 2 )
+
+[node name="Logo" parent="Content" index="1"]
+visible = false
+
+[node name="MarginContainer" parent="Content" index="2"]
+margin_left = 159.0
+margin_right = 320.0
+
+[node name="Message" type="Label" parent="Content/MarginContainer" index="0"]
+margin_top = 120.0
+margin_right = 161.0
+margin_bottom = 270.0
+size_flags_vertical = 1
+text = "Congratulations, you won!"
+align = 1
+uppercase = true
+
+[node name="Buttons" parent="Content/MarginContainer" index="1"]
+margin_left = 80.0
+margin_right = 80.0

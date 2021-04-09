@@ -1,0 +1,37 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://screens/BaseScreen.tscn" type="PackedScene" id=1]
+[ext_resource path="res://screens/MainMenu.gd" type="Script" id=2]
+
+[node name="Screen" instance=ExtResource( 1 )]
+script = ExtResource( 2 )
+
+[node name="MarginContainer" parent="Content" index="2"]
+margin_left = 189.0
+margin_right = 290.0
+
+[node name="VBoxContainer" parent="Content/MarginContainer" index="0"]
+margin_right = 101.0
+
+[node name="Buttons" parent="Content/MarginContainer/VBoxContainer" index="0"]
+margin_right = 101.0
+margin_bottom = 30.0
+
+[node name="Start" type="Button" parent="Content/MarginContainer/VBoxContainer/Buttons" index="0"]
+margin_right = 101.0
+margin_bottom = 12.0
+text = "Start with level 1"
+
+[node name="EnterCode" type="Button" parent="Content/MarginContainer/VBoxContainer/Buttons" index="1"]
+margin_top = 18.0
+margin_right = 101.0
+margin_bottom = 30.0
+text = "Enter code"
+
+[node name="HButtons" parent="Content/MarginContainer/VBoxContainer" index="1"]
+margin_top = 34.0
+margin_right = 101.0
+margin_bottom = 34.0
+
+[connection signal="pressed" from="Content/MarginContainer/VBoxContainer/Buttons/Start" to="." method="_on_NewGame_pressed"]
+[connection signal="pressed" from="Content/MarginContainer/VBoxContainer/Buttons/EnterCode" to="." method="_on_EnterCode_pressed"]
