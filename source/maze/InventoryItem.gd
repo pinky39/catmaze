@@ -8,13 +8,12 @@ func _ready():
 	if amount == 0:
 		hide()
 	else:
-		$Button.connect("toggled", owner, "_on_inventory_item_toggled", [self])
+		$Button.connect("toggled", owner, "change_selected_item", [self])
 
 func unpress():
 	$Button.pressed = false
 
-func consume():
-	unpress()
+func consume():				
 	_set_amount(amount - 1)
 
 func create_icon():
@@ -29,4 +28,5 @@ func _set_amount(value):
 	$Label.text = str(amount)
 	
 	if amount <= 0:
+		unpress()
 		$Button.disabled = true
