@@ -105,8 +105,7 @@ func _move_one_step(dir):
 								Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
 	$Tween.start()	
 
-func _pick_up_shiny(shiny):
-	#if (shiny == _next_shiny.shiny):
+func _pick_up_shiny(shiny):	
 	_next_shiny = null
 		
 	shiny.queue_free()	

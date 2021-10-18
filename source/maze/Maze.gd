@@ -41,6 +41,8 @@ func _move_inventory_item(pos):
 		selected_item.icon.visible = true
 		add_child(selected_item.icon)
 	
+	# Align selected inventory item to
+	# maze floor tile
 	if tile_pos and selected_item:
 		selected_item.icon.position = tile_pos
 	

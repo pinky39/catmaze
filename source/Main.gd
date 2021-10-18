@@ -5,6 +5,7 @@ var _level_count = _get_level_count()
 
 onready var _s = $Screens
 
+# Entrypoint
 func _ready():
 	open_main_menu(1)
 
