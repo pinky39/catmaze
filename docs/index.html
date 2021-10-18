@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+		<style>		
+		
+		.toolbar {
+			position: absolute;
+			display: flex;
+			right: 20px;
+			bottom: 20px;
+			color: #cbdbfc;	
+			background-color: #222034;
+			border: 3px solid #45283c;
+			z-index: 10;
+		}
+		
+		.loading {
+			background: #222034;
+			position: absolute;
+			top:0px;
+			bottom:0px;
+			left:0px;
+			right:0px;
+			color: #cbdbfc;
+		}
+		
+		.loading p {
+			 text-align: center;
+			 font-size: 20px;			 
+			 text-weight:bold;
+		}
+
+		.toolbar a {
+			color: #222;
+			text-decoration:none;
+		}
+
+		.toolbar > div {			
+			margin: 10px;	
+			padding: 5px;		
+			cursor: pointer;
+			font-size: 14px;
+			font-family: Arial;
+			font-weight: bold;
+		}
+
+		.toolbar > div:hover {
+			color: #d95763;		
+		} 
+		</style>
+		
+    </head>
+    <body>
+        <div class="toolbar">
+			<div id="fullscreen">FS</div>
+		</div>
+		
+		<div class="loading">
+			<p>Loading, please wait...</p>
+		</div>
+		
+		<canvas id="canvas"></canvas>
+        <script src="index.js"></script>
+        <script>
+            
+			function gotoFullscreen() {
+				let canvas = document.getElementById("canvas");
+				canvas.requestFullscreen();							
+			}
+			
+			let fsButton = document.getElementById("fullscreen");			
+			fsButton.addEventListener("click", gotoFullscreen);
+			
+			document.title = "Catmaze 2021 (loading...)";
+			
+			var engine = new Engine({"args":[],"canvasResizePolicy":2,"executable":"index","experimentalVK":false,"fileSizes":{"index.pck":292880,"index.wasm":12665632},"gdnativeLibs":[]});
+            engine.startGame();
+        </script>
+    </body>
+</html>
